@@ -1,0 +1,256 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Produce Calendar</title>
+  <meta name="description" content="Produce Calendar">
+  <meta name="author" content="Xavier Butcher">
+
+  <style>
+      body {
+          background-color: #f7f5ed;
+      }
+      .flexContainer {
+          width 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+      }
+      .column {
+          width: 50% 
+      }
+      .sectionHeader {
+          text-align: center;
+          font-family: sans-serif;
+          font-size: 18px;
+      }
+      .productLi {
+          color: white;
+          width 100%;
+          margin: 0px 5px 10px 5px;
+          padding: 15px 5px 15px 5px;
+          border-radius: 5px;
+          box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+              
+          font-family: sans-serif;
+          font-size: 18px;
+          font-weight: 200;
+          text-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+      }
+      .content {
+          max-width: 600px;
+          text-align: center;
+          margin: auto;
+      }
+      .fvHeader {
+          color: grey;
+          font-family: sans-serif;
+          font-size: 18px;
+      }
+      .inLocally {
+          background-color: green
+      }
+      .inSeason {
+          background-color: mediumseagreen
+      }
+      .xSeason {
+          background-color: orange
+      }
+      .outSeason {
+          background-color: red
+      }
+      a {
+          color: inherit;
+          text-decoration: none;
+      }
+      #infoBtn {
+          position: fixed;
+          bottom: 15px;
+          right: 15px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: white;
+          box-shadow: 2px 5px 14px rgba(0,0,0,0.2);
+          text-align: center;
+          line-height: 40px;
+          font-family: serif;
+          font-style: italic;
+          font-weight: 500;
+          font-size: 21px;
+          color: dimgrey;
+          z-index: 100;
+          /*transform: translate3d(0,0,0);  fix disappearing on fast scroll */
+       }
+        .sidenav {
+            height: 0; /* 100% Full-height */
+            width: 100%; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Stay on top */
+            top: 0; /* Stay at the top */
+            left: 0;
+            background-color: #3d3d3d; 
+            overflow: hidden; /* Disable horizontal scroll */
+            padding-top: 0; /* Place content 60px from the top */
+            transition: 300ms; /* 0.5 second transition effect to slide in the sidenav */
+            transition-timing-function: cubic-bezier(0.7,0,0.7,1);
+            color: white;
+            text-align: left;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center;
+        }
+        .closeBtn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 36px;
+            display: block;
+        }
+          .slideContent {
+              width: 80%;
+              max-width: 500px;
+              margin: 30px auto;
+              font-size: 20px;
+              font-weight: 200;
+              margin: 0 auto;
+          }
+          .mt2 {
+              margin: 10px auto;
+              font-size: 15px;
+          }
+          .key {
+              display: inline-block;
+              margin: 0 10px 0 0;
+              vertical-align: -20%;
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+          }
+          .sidenav a {
+              color: grey;
+            }
+        .panel {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            
+            color: green;
+            background-color: #fcfcfc;
+            display: none;
+            
+            margin: 0 5px 10px 5px;
+            padding: 15px 5px 15px 5px;
+     
+            box-shadow: 0px 3px 3px rgba(0,0,0,0.07);
+            border-radius: 5px;
+            
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+      
+      
+  </style>
+
+  <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>-->
+    
+    <!-- jquery -->  
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+</head>
+
+<body>
+
+    <div id="infoBtn">i</div>
+    
+    <div id="mySidenav" class="sidenav">
+        <div class="slideContent">
+            <p>A guide to which Northern/Western European produce is in season.</p>
+            <br>
+            <p class="mt2"><span class="key inLocally"></span>In Season, predominantly from domestic cultivation.</p>
+            <p class="mt2"><span class="key inSeason"></span>In Season.</p>
+            <p class="mt2"><span class="key xSeason"></span>Coming into or out of season.</p>
+            <p class="mt2"><span class="key outSeason"></span>Out of Season.</p>
+            <p class="mt2">⚠️ &ensp;Imported.</p>
+            <br>
+            <p class="mt2">Sources: <a href="http://na-nu.com/terfloth.org/Kitchen/Season_Cal.pdf">[1]</a> <a href="https://www.bbcgoodfood.com/seasonal-calendar/all">[2]</a> <a href="http://www.damngoodrecipes.com/seasonal/8.html">[3]</a> <a href="http://www.eattheseasons.co.uk/seasons.php">[4]</a></p>
+            <p class="mt2"><a href="http://www.xavierbutcher.com">By Xavier Butcher</a>
+            <div class="closeBtn">&times;</div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="flexContainer">
+            <div class="column" id="vegCol"><h2 class="fvHeader">Vegetables</h2></div>
+            <div class="column" id="fruitCol"><h2 class="fvHeader">Fruit</h2></div>
+        </div>
+    </div>
+    
+  <script>
+      
+
+      
+      //http://www.eattheseasons.co.uk/february.php
+      
+    $( "#infoBtn" ).click(function() {
+        document.getElementById("mySidenav").style.height = "100%";
+    });
+    $( ".closeBtn" ).click(function() {
+        document.getElementById("mySidenav").style.height = "0";
+    });
+
+    $.ajax({
+      url: 'https://spreadsheets.google.com/feeds/list/12T_MBr5gzHDr6ywNjtFaQ6M4AxjP3PlGcLpEp1WOqsI/od6/public/values?alt=json',
+      dataType: 'json',
+      type: 'get',
+      success: function(data2) {
+         data2loop(data2, "In Locally", "productLi inLocally");
+         data2loop(data2, "At its best", "productLi inSeason");
+         data2loop(data2, "Coming in", "productLi xSeason");
+         data2loop(data2, "Out of Season", "productLi outSeason"); 
+      }
+    });
+
+    $(document).on({
+        click: function(){
+            $('.panel').slideUp("100");
+        }
+    },":not(.productLi)");
+
+  function data2loop(data2, seasonInput, classInput){ 
+
+          var date = new Date(),
+          locale = "en-eu",
+          month = date.toLocaleString(locale, { month: "long" });
+
+          mL = month.toLowerCase();
+
+          for (i = 0; i < data2.rows.length; i++) { 
+
+                  var seasonContent = `<div class="productLi ${classInput}">
+                                       <div>${data2.rows[i].product}</div>
+                                       </div>
+                                       <div class="panel"><a href=${data2.rows[i].produrl}>More Info</a></div>
+                                       `
+                  
+                  $(".productLi").click(function () {
+                      $(this).next('.panel').slideToggle("100", function(){
+                          $(this).stop(true, true);
+                      });
+                  });
+
+                  if ( data2.rows[i][mL] == seasonInput && data2.rows[i].type == "vegetable") {
+                    $('#vegCol').append(seasonContent);
+                  } else if ( data2.rows[i][mL] == seasonInput && data2.rows[i].type == "fruit") {
+                    $('#fruitCol').append(seasonContent);
+                    } 
+          }
+    }
+ 
+  </script>
+    
+</body>
+    
+</html>
