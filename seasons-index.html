@@ -202,7 +202,7 @@
     });
 
     $.ajax({
-      url: 'https://spreadsheets.google.com/feeds/list/12T_MBr5gzHDr6ywNjtFaQ6M4AxjP3PlGcLpEp1WOqsI/od6/public/values?alt=json',
+      url: 'https://raw.githubusercontent.com/zeedee-h/inseason/master/Seasonal%204%20-%20Sheet1.json',
       dataType: 'json',
       type: 'get',
       success: function(data2) {
@@ -210,6 +210,8 @@
          data2loop(data2, "At its best", "productLi inSeason");
          data2loop(data2, "Coming in", "productLi xSeason");
          data2loop(data2, "Out of Season", "productLi outSeason"); 
+          console.log(data2[3]);
+          console.log(data2[3].Type);
       }
     });
 
@@ -225,14 +227,14 @@
           locale = "en-eu",
           month = date.toLocaleString(locale, { month: "long" });
 
-          mL = month.toLowerCase();
+          mL = month; //month.toLowerCase();
 
-          for (i = 0; i < data2.rows.length; i++) { 
+          for (i = 0; i < data2.length; i++) { 
 
                   var seasonContent = `<div class="productLi ${classInput}">
-                                       <div>${data2.rows[i].product}</div>
+                                       <div>${data2[i].Product}</div>
                                        </div>
-                                       <div class="panel"><a href=${data2.rows[i].produrl}>More Info</a></div>
+                                       <div class="panel"><a href=${data2[i].prodURL}>More Info</a></div>
                                        `
                   
                   $(".productLi").click(function () {
@@ -241,9 +243,9 @@
                       });
                   });
 
-                  if ( data2.rows[i][mL] == seasonInput && data2.rows[i].type == "vegetable") {
+                  if ( data2[i][mL] == seasonInput && data2[i].Type == "vegetable") {
                     $('#vegCol').append(seasonContent);
-                  } else if ( data2.rows[i][mL] == seasonInput && data2.rows[i].type == "fruit") {
+                  } else if ( data2[i][mL] == seasonInput && data2[i].Type == "fruit") {
                     $('#fruitCol').append(seasonContent);
                     } 
           }
